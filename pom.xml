@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.green.energy.tracker</groupId>
+    <artifactId>microservice-perfomarnce-tests</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <baseUrl>http://green-energy-tracker</baseUrl>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>3.13.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <!-- Testing Profiles -->
+        <profile>
+            <id>SingleUser</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <simulationClass>com.green.energy.tracker.perf.test.simulation.SingleUser</simulationClass>
+            </properties>
+        </profile>
+        <profile>
+            <id>Baseline</id>
+            <properties>
+                <simulationClass>com.green.energy.tracker.perf.test.simulation.Baseline</simulationClass>
+            </properties>
+        </profile>
+        <profile>
+            <id>Load</id>
+            <properties>
+                <simulationClass>com.green.energy.tracker.perf.test.simulation.Load</simulationClass>
+            </properties>
+        </profile>
+        <profile>
+            <id>Spike</id>
+            <properties>
+                <simulationClass>com.green.energy.tracker.perf.test.simulation.Spike</simulationClass>
+            </properties>
+        </profile>
+        <profile>
+            <id>Stress</id>
+            <properties>
+                <simulationClass>com.green.energy.tracker.perf.test.simulation.Stress</simulationClass>
+            </properties>
+        </profile>
+
+        <!-- Microservice profiles -->
+        <profile>
+            <id>User</id>
+            <properties>
+                <serviceType>user</serviceType>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.7.0</version>
+                <configuration>
+                    <simulationsFolder>src/test/java</simulationsFolder>
+                    <simulationClass>${simulationClass}</simulationClass>
+                    <jvmArgs>
+                        <jvmArg>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArg>
+                        <jvmArg>-DAPP_URL=${baseUrl}</jvmArg>
+                        <jvmArg>-DSERVICE_TYPE=${serviceType}</jvmArg>
+                    </jvmArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
