@@ -37,7 +37,7 @@ pipeline {
                     publishHTML(target: [
                         reportDir: reportDir,
                         reportFiles: 'index.html',
-                        reportName: 'Gatling Report'
+                        reportName: 'Gatling Report',
                         allowMissing: true
                     ])
                 }
