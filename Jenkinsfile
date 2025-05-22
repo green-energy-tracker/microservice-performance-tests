@@ -20,11 +20,7 @@ pipeline {
         stage('Run Gatling Test') {
             steps {
                 sh """
-                    mvn clean test-compile \
-                      -Dgatling.simulationClass=com.green.energy.tracker.perf.test.simulation.${params.SIMULATION_TYPE} \
-                      -DAPP_URL=${params.APP_URL} \
-                      -DSERVICE_TYPE=${params.SERVICE_TYPE} \
-                      gatling:test
+                    mvn gatling:test -P${params.SERVICE_TYPE} -P${params.SIMULATION_TYPE}
                 """
             }
         }
