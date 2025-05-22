@@ -25,7 +25,7 @@ public class UserManagement extends ServiceType {
 
     @Override
     public ScenarioBuilder scenario() {
-        return CoreDsl.scenario("UserManagement").exec(findByUsername());
+        return CoreDsl.scenario("UserManagement").exec(findByUsername(),findById());
     }
 
     private HttpRequestActionBuilder findByUsername() {
