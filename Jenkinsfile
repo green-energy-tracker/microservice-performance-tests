@@ -38,6 +38,7 @@ pipeline {
                         reportDir: reportDir,
                         reportFiles: 'index.html',
                         reportName: 'Gatling Report'
+                        allowMissing: true
                     ])
                 }
             }
