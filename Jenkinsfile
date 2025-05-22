@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            yaml libraryResource('k8s/jenkins-agent-pod.yaml')
+            defaultContainer 'maven'
+        }
+    }
 
     parameters {
         choice(name: 'SIMULATION_TYPE', choices: ['SingleUser', 'Baseline', 'Load', 'Spike', 'Stress'], description: 'Tipo di test da eseguire')
