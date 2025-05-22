@@ -33,12 +33,15 @@ pipeline {
         stage('Publish Results') {
             steps {
                 script {
-                    def reportDir = sh(script: "ls -td target/gatling/${params.SIMULATION_TYPE.toLowerCase()}* | head -n 1", returnStdout: true).trim()
+                    def gatlingFolder = sh(
+                        script: "ls -d target/gatling/${params.SIMULATION_TYPE.toLowerCase()}-* | head -1",
+                        returnStdout: true
+                    ).trim()
+
                     publishHTML(target: [
-                        reportDir: reportDir,
+                        reportDir: gatlingFolder,
                         reportFiles: 'index.html',
-                        reportName: 'Gatling Report',
-                        allowMissing: true
+                        reportName: 'Gatling Report'
                     ])
                 }
             }
