@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            yaml libraryResource('k8s/jenkins-agent-pod.yaml')
+            yamlFile 'src/test/resources/k8s/jenkins-agent-pod.yaml'
             defaultContainer 'maven'
         }
     }
@@ -32,11 +32,14 @@ pipeline {
 
         stage('Publish Results') {
             steps {
-                publishHTML(target: [
-                    reportDir: 'target/gatling',
-                    reportFiles: "${params.SIMULATION_TYPE.toLowerCase()}-index.html",
-                    reportName: 'Gatling Report'
-                ])
+                script {
+                    def reportDir = sh(script: "ls -td target/gatling/${params.SIMULATION_TYPE.toLowerCase()}* | head -n 1", returnStdout: true).trim()
+                    publishHTML(target: [
+                        reportDir: reportDir,
+                        reportFiles: 'index.html',
+                        reportName: 'Gatling Report'
+                    ])
+                }
             }
         }
     }
