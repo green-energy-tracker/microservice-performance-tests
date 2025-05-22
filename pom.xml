@@ -14,7 +14,6 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <baseUrl>http://green-energy-tracker</baseUrl>
     </properties>
 
     <dependencies>
@@ -72,6 +71,7 @@
             <id>User</id>
             <properties>
                 <serviceType>user</serviceType>
+                <baseUrl>http://user-management-service.green-energy-tracker:3000</baseUrl>
             </properties>
         </profile>
     </profiles>

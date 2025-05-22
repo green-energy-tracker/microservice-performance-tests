@@ -9,7 +9,7 @@ public abstract class ServiceType {
     protected final Service service;
     private final String baseUrl = System.getProperty("APP_URL");
     protected String buildUrl(String operation) {
-        return baseUrl + "." + service.getName() + "/api/v" + service.getVersion() + "/" + service.getService() + "/" + operation;
+        return baseUrl + "/api/v" + service.getVersion() + "/" + service.getService() + "/" + operation;
     }
 
     public abstract ScenarioBuilder scenario();
