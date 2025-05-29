@@ -74,6 +74,13 @@
                 <baseUrl>http://user-management-service.green-energy-tracker:3000</baseUrl>
             </properties>
         </profile>
+        <profile>
+            <id>Site Sensor</id>
+            <properties>
+                <serviceType>site-sensor</serviceType>
+                <baseUrl>http://site-sensor-management-service.green-energy-tracker:3001</baseUrl>
+            </properties>
+        </profile>
     </profiles>
     <build>
         <testResources>

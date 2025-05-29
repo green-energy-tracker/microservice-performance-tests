@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         choice(name: 'SIMULATION_TYPE', choices: ['SingleUser', 'Baseline', 'Load', 'Spike', 'Stress'], description: 'Tipo di test da eseguire')
-        choice(name: 'SERVICE_TYPE', choices: ['User'], description: 'Tipo di microservizio da testare')
+        choice(name: 'SERVICE_TYPE', choices: ['User','Site Sensor'], description: 'Tipo di microservizio da testare')
     }
 
     environment {
