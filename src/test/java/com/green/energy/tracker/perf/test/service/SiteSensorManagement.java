@@ -18,30 +18,35 @@ public class SiteSensorManagement extends ServiceType {
 
     @Getter
     @RequiredArgsConstructor
-    enum Operation {
-        FIND_BY_USERNAME("findByUsername"),
-        FIND_BY_ID("findById"),;
+    enum OperationSite {
+        FIND_BY_NAME("site/findByName");
+        private final String value;
+    }
+    @Getter
+    @RequiredArgsConstructor
+    enum OperationSensor {
+        FIND_BY_CODE("sensor/findByCode");
         private final String value;
     }
 
     @Override
     public ScenarioBuilder scenario() {
-        return CoreDsl.scenario("SiteSensorManagement").exec(findByUsername(),findById());
+        return CoreDsl.scenario("SiteSensorManagement").exec(findByName(),findByCode());
     }
 
-    private HttpRequestActionBuilder findByUsername() {
-        String url = buildUrl(Operation.FIND_BY_USERNAME.getValue());
+    private HttpRequestActionBuilder findByName() {
+        String url = buildUrl(OperationSite.FIND_BY_NAME.getValue());
         return http("GET " + url)
                 .get(url)
-                .queryParam("username", "ADMIN")
+                .queryParam("name", "Ecosol2")
                 .check(status().is(200));
     }
 
-    private HttpRequestActionBuilder findById() {
-        String url = buildUrl(Operation.FIND_BY_ID.getValue());
+    private HttpRequestActionBuilder findByCode() {
+        String url = buildUrl(OperationSensor.FIND_BY_CODE.getValue());
         return http("GET " + url)
                 .get(url)
-                .queryParam("id", 1)
+                .queryParam("code", "HTRYR6548")
                 .check(status().is(200));
     }
 
