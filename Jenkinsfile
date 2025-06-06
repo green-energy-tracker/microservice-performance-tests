@@ -25,7 +25,7 @@ pipeline {
         stage('Run Gatling Test') {
             steps {
                 sh """
-                    mvn gatling:test -P${params.SERVICE_TYPE} -P${params.SIMULATION_TYPE}
+                    mvn gatling:test -P${params.SERVICE_TYPE} -P${params.SIMULATION_TYPE} -Dgraylog.host=${params.GRAYLOG_HOST} -Dgraylog.port=${params.GRAYLOG_PORT}
                 """
             }
         }

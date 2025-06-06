@@ -1,6 +1,6 @@
 <configuration>
-    <springProperty name="graylogHost" source="graylog.host"/>
-    <springProperty name="graylogPort" source="graylog.port"/>
+    <property name="graylogHost" value="${GRAYLOG_HOST}" />
+    <property name="graylogPort" value="${GRAYLOG_PORT}" />
 
     <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
         <graylogHost>${graylogHost}</graylogHost>
