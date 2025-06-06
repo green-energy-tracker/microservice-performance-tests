@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <graylog.host>http://logging.graylog</graylog.host>
         <graylog.port>12201</graylog.port>
+        <logbackResource>src/test/resources/logback-test.xml</logbackResource>
     </properties>
 
     <dependencies>
@@ -111,6 +112,7 @@
                         <jvmArg>-DSERVICE_TYPE=${serviceType}</jvmArg>
                         <jvmArg>-DGRAYLOG_HOST=${graylog.host}</jvmArg>
                         <jvmArg>-DGRAYLOG_PORT=${graylog.port}</jvmArg>
+                        <jvmArg>-Dlogback.configurationFile=${logbackResource}</jvmArg>
                     </jvmArgs>
                 </configuration>
             </plugin>
