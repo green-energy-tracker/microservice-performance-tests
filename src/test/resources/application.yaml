@@ -1,3 +1,0 @@
-graylog:
-  host: http://logging.graylog
-  port: '12201'
