@@ -1,15 +1,19 @@
 package com.green.energy.tracker.perf.test.service;
 
 import com.green.energy.tracker.perf.test.service.factory.ServiceType;
+import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.CoreDsl;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.http.HttpRequestActionBuilder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import static io.gatling.javaapi.core.CoreDsl.exec;
 import static io.gatling.javaapi.http.HttpDsl.http;
 import static io.gatling.javaapi.http.HttpDsl.status;
 
+@SuperBuilder
 public class SiteSensorManagement extends ServiceType {
 
     public SiteSensorManagement(Service service) {
@@ -32,6 +36,10 @@ public class SiteSensorManagement extends ServiceType {
     @Override
     public ScenarioBuilder scenario() {
         return CoreDsl.scenario("SiteSensorManagement").exec(findByName(),findByCode());
+    }
+
+    public ChainBuilder chain() {
+        return exec(findByName(),findByCode());
     }
 
     private HttpRequestActionBuilder findByName() {
