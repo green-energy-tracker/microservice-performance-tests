@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Service {
     USER_MANAGEMENT("user",1,"user-management"),
     SITE_SENSOR_MANAGEMENT("site-sensor",1,"site-sensor-management"),
-    ALL("all",1,"");
+    ALL("all",1,"all");
 
     private final String name;
     private final Integer version;
