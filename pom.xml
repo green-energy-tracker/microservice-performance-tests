@@ -14,9 +14,6 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <graylog.host>http://logging.graylog</graylog.host>
-        <graylog.port>12201</graylog.port>
-        <logbackResource>src/test/resources/logback-test.xml</logbackResource>
     </properties>
 
     <dependencies>
@@ -88,9 +85,6 @@
     <build>
         <testResources>
             <testResource>
-                <directory>src/test/resources</directory>
-            </testResource>
-            <testResource>
                 <directory>src/test/java</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
@@ -110,9 +104,6 @@
                         <jvmArg>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArg>
                         <jvmArg>-DAPP_URL=${baseUrl}</jvmArg>
                         <jvmArg>-DSERVICE_TYPE=${serviceType}</jvmArg>
-                        <jvmArg>-DGRAYLOG_HOST=${graylog.host}</jvmArg>
-                        <jvmArg>-DGRAYLOG_PORT=${graylog.port}</jvmArg>
-                        <jvmArg>-Dlogback.configurationFile=${logbackResource}</jvmArg>
                     </jvmArgs>
                 </configuration>
             </plugin>
